@@ -136,11 +136,8 @@ public class VigenereCipher {
         System.out.println("Key: " + key);
         System.out.println("exteded Key:    " + extendKey());
 
-        String encryptedText = encryptVigenere();
-        System.out.println("Encrypted Text: " + encryptedText);
-
-        String decryptedText = decryptVigenere();
-        System.out.println("Decrypted Text: " + decryptedText);
+        System.out.println("Encrypted Text: " + encryptVigenere());
+        System.out.println("Decrypted Text: " + decryptVigenere());
     }
 
     private static void printOptions() {
