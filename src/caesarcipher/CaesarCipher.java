@@ -14,7 +14,9 @@ public class CaesarCipher {
     private static int key = 5;
 
     public static void main(String[] args) {
-        System.out.println("<Programmed by: Barzi Yassin Karim>\n");
+        System.out.println("<Programmed by: Barzi Yassin Karim>\n\n");
+        System.out.println("• • • Caesar Cipher Program • • •\n");
+
         fillDictionary();
 
         System.out.println("\nPress:\n  E: to Encrypt\n  D: to Decrypt\n  K: to Set Key\n  X: to Exit the program\n");
