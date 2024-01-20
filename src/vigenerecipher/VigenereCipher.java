@@ -14,62 +14,14 @@ public class VigenereCipher {
     private static String cipherText;
     private static String key = "networking";
 
-    public static void main(String[] args) {
-        System.out.println("<Programmed by: Barzi Yassin Karim>\n\n");
-        System.out.println("• • • Vigenere Cipher Program • • •\n");
-        printOptions();
-        printDetails();
-        int option = -1;
-        do {
-            switch (option) {
-                case -1:
-                    break;
-                case 0:
-                    return;
-                case 1:
-                    System.out.print("Enter new plain text: ");
-                    plainText = inputString();
-                    printDetails();
-                    break;
-                case 2:
-                    System.out.print("Enter new key: ");
-                    String oldKey = key;
-                    key = inputString();
-                    System.out.println("key changed from \"" + oldKey + "\" to \"" + key + "\"");
-                    break;
-                case 3:
-                    printDetails();
-                    break;
-                default:
-                    System.out.println("Wrong option entered!");
-
-            }
-
-            System.out.println("\n•\n");
-            System.out.print("input an option number: ");
-            option = inputInt();
-        } while (option != 0);
-
-//        while (true) {
-//
-//            System.out.println("plain text: " + plaintext);
-//
-//            String encryptedText = encryptVigenere(plaintext, key);
-//            System.out.println("Encrypted Text: " + encryptedText);
-//
-//            String decryptedText = decryptVigenere(encryptedText, key);
-//            System.out.println("Decrypted Text: " + decryptedText);
-//        }
-    }
-
-    private static String encryptVigenere() {
+    public static String encryptVigenere() {
         StringBuilder ciphertext = new StringBuilder();
 
-        for (int i = 0, j = 0; i < plainText.length(); i++) {
-            char currentChar = plainText.charAt(i);
+        for (int i = 0, j = 0; i < getPlainText().length(); i++) {
+            char currentChar = getPlainText().charAt(i);
 
             if (Character.isLetter(currentChar)) {
-                char keyChar = key.charAt(j % key.length());
+                char keyChar = getKey().charAt(j % getKey().length());
                 char encryptedChar = encryptChar(currentChar, keyChar);
                 ciphertext.append(encryptedChar);
                 j++;
@@ -90,7 +42,7 @@ public class VigenereCipher {
             char currentChar = cipherText.charAt(i);
 
             if (Character.isLetter(currentChar)) {
-                char keyChar = key.charAt(j % key.length());
+                char keyChar = getKey().charAt(j % getKey().length());
                 char decryptedChar = decryptChar(currentChar, keyChar);
                 decryptedText.append(decryptedChar);
                 j++;
@@ -102,11 +54,11 @@ public class VigenereCipher {
         return decryptedText.toString();
     }
 
-    private static char encryptChar(char plaintextChar, char keyChar) {
+    public static char encryptChar(char plaintextChar, char keyChar) {
         return (char) (((plaintextChar - 'a' + keyChar - 'a') % 26) + 'a');
     }
 
-    private static char decryptChar(char ciphertextChar, char keyChar) {
+    public static char decryptChar(char ciphertextChar, char keyChar) {
         int result = (ciphertextChar - 'a' - (keyChar - 'a')) % 26;
         // Handling negative result
         if (result < 0) {
@@ -115,12 +67,12 @@ public class VigenereCipher {
         return (char) (result + 'a');
     }
 
-    private static String extendKey() {
-        int length = plainText.length();
+    public static String extendKey() {
+        int length = getPlainText().length();
         // Repeat the word until it reaches the length characters
         StringBuilder duplicatedWord = new StringBuilder();
         while (duplicatedWord.length() < length) {
-            duplicatedWord.append(key);
+            duplicatedWord.append(getKey());
         }
 
         // Trim the excess characters if more than length
@@ -130,17 +82,17 @@ public class VigenereCipher {
     }
 
     // printing methods
-    private static void printDetails() {
+    public static void printDetails() {
         System.out.println("");
-        System.out.println("Plain text: " + plainText + " | length: " + plainText.length());
-        System.out.println("Key: " + key);
+        System.out.println("Plain text: " + getPlainText() + " | length: " + getPlainText().length());
+        System.out.println("Key: " + getKey());
         System.out.println("exteded Key:    " + extendKey());
 
         System.out.println("Encrypted Text: " + encryptVigenere());
         System.out.println("Decrypted Text: " + decryptVigenere());
     }
 
-    private static void printOptions() {
+    public static void printOptions() {
         System.out.println("menu options:");
         System.out.println("\t1: changing plain text");
         System.out.println("\t2: changing key");
@@ -150,7 +102,7 @@ public class VigenereCipher {
     }
 
     // helper methods
-    private static String inputString() {
+    public static String inputString() {
         sc = new Scanner(System.in);
         String input = "";
         try {
@@ -163,7 +115,7 @@ public class VigenereCipher {
         }
     }
 
-    private static int inputInt() {
+    public static int inputInt() {
         sc = new Scanner(System.in);
         int input = 0;
         do {
@@ -178,5 +130,22 @@ public class VigenereCipher {
             }
         } while (input == 0);
 //        return input;
+    }
+
+// starting getter and setter methods
+    public static String getPlainText() {
+        return plainText;
+    }
+
+    public static String getKey() {
+        return key;
+    }
+
+    public static void setPlainText(String aPlainText) {
+        plainText = aPlainText;
+    }
+
+    public static void setKey(String aKey) {
+        key = aKey;
     }
 }
